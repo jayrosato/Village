@@ -1,13 +1,13 @@
 public class Room
 {
     public string Name { get; set; }
-    public Interaction[] Interactions { get; set; }
-    public Room[] ConnectedRooms { get; set; }
-    public Room(string name, Interaction[] interactions, Room[] connectedRooms = null)
+    public List<Interaction> Interactions { get; set; }
+    public List<Room> ConnectedRooms { get; set; }
+    public Room(string name, List<Interaction> interactions, List<Room> connectedRooms)
     {
         this.Name = name;
-        this.Interactions = interactions;
-        this.ConnectedRooms = connectedRooms;
+        Interactions = interactions ?? new List<Interaction>();
+        ConnectedRooms = connectedRooms ?? new List<Room>();
     }
 
     public List<Interaction> UpdateRoom()
@@ -18,13 +18,18 @@ public class Room
                 (interaction.Completed != true) &&
                 (interaction.ReqAttribute == AttributeType.None || adlo.GetCharAttr(interaction.ReqAttribute) >= interaction.Threshold) &&
                 (interaction.Character == null || interaction.Character.Opinion >= interaction.ReqOpinion) &&
-                (interaction.ReqTrait == Trait.None || Globals.Adlo.Traits.Contains(interaction.ReqTrait))
+                (interaction.ReqTrait == Trait.None || adlo.CheckAdloTrait(interaction.ReqTrait))
             ).ToList();
         return availableInteractions;
     }
-    public void GenericRoom()
+    public void NextRoom(Room room)
+    {
+        room.EnterRoom();
+    }
+    public void EnterRoom()
     {
         bool inRoom = true;
+        Room nextRoom = ConnectedRooms[0];
         Console.WriteLine($"Standing in {this.Name}...");
         List<Interaction> availableInteractions = UpdateRoom();
         while (inRoom)
@@ -32,20 +37,20 @@ public class Room
             if (availableInteractions.Count == 0)
             {
                 Console.WriteLine("Nothing to see here...");
-                if (this.ConnectedRooms == null)
+                if (ConnectedRooms == null)
                 {
-                    break;
+                    return;
                 }
-                for (int i = 0; i < availableInteractions.Count; i++)
-                    {
-                        Console.WriteLine($"{i + 1}. {ConnectedRooms[i].Name}");
-                    }
-                if (int.TryParse(Console.ReadLine(), out int decision) &&
-                    decision >= 1 && decision <= availableInteractions.Count())
+                for (int i = 0; i < ConnectedRooms.Count; i++)
                 {
-                    Room nextRoom = ConnectedRooms[decision - 1];
-                    nextRoom.GenericRoom();
-                    break;
+                    Console.WriteLine($"{i + 1}. {ConnectedRooms[i].Name}");
+                }
+                if (int.TryParse(Console.ReadLine(), out int decision) &&
+                    decision >= 1 && decision <= ConnectedRooms.Count)
+                {
+                    nextRoom = ConnectedRooms[decision - 1];
+                    Console.WriteLine($"Entering {nextRoom.Name}");
+                    inRoom = false;
                 }
             }
             else
@@ -68,5 +73,6 @@ public class Room
                 }
             }
         }
+        NextRoom(nextRoom);
     }
 }

@@ -64,7 +64,7 @@ public class Decision
         .Where(o =>
             (o.GetAttribute == AttributeType.None || adlo.GetCharAttr(o.GetAttribute) >= o.Threshhold) &&
             (character == null || o.OpRequired == 0 || character.Opinion >= o.OpRequired) &&
-            (o.TraitRequired == Trait.None || adlo.Traits.Contains(o.TraitRequired))
+            (o.TraitRequired == Trait.None || adlo.CheckAdloTrait(o.TraitRequired))
         ).ToList();
         bool awaitInput = true;
         while (awaitInput == true)

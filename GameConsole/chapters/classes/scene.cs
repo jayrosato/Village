@@ -1,22 +1,14 @@
 public class Scene
 {
-    public Room[] Rooms { get; set; }
-    public Room Start { get; set; }
+    public List<Room> Rooms { get; set; }
 
-    public Scene(Room[] rooms, Room start = null)
+    public Scene(List<Room> rooms)
     {
         this.Rooms = rooms;
-        if (start == null)
-        {
-            this.Start = rooms[0];
-        }
-        else
-        {
-            this.Start = start;
-        }
     }
     public void BeginScene()
     {
-        this.Start.GenericRoom();
+        Room room = Rooms[0];
+        room.EnterRoom();
     }
 }

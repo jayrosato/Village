@@ -21,9 +21,15 @@ public enum AttributeType
 public enum Trait
 {
     None,
-    Orator,
-    Barbed,
-    Cheerful
+    Cheerful,
+    LevelHeaded,
+    Melancholic,
+    FreedomFighter,
+    Pragmatic,
+    Reactionary,
+    Famous,
+    Unknown,
+    Infamous,
 }
 
 public enum Prof

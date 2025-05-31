@@ -12,3 +12,4 @@ C:\Users\jay_r\ConsoleGame\GameConsole\obj\Debug\net9.0\refint\GameConsole.dll
 C:\Users\jay_r\ConsoleGame\GameConsole\obj\Debug\net9.0\GameConsole.pdb
 C:\Users\jay_r\ConsoleGame\GameConsole\obj\Debug\net9.0\GameConsole.genruntimeconfig.cache
 C:\Users\jay_r\ConsoleGame\GameConsole\obj\Debug\net9.0\ref\GameConsole.dll
+C:\Users\jay_r\ConsoleGame\GameConsole\obj\Debug\net9.0\GameConsole.sourcelink.json

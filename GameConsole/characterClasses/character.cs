@@ -2,54 +2,46 @@ using System.Net.NetworkInformation;
 
 public class Character
 {
-    private string name { get; set; }
-    private string surname { get; set; }
-    private string title { get; set; }
-    private string origin { get; set; }
-    private string profession { get; set; }
-    public int Attitude { get; set; }
-    public int Activism { get; set; }
-    public int Reputation { get; set; }
-
-    string outlook
+    private string name;
+    private string surname;
+    private Title title;
+    private Origin origin;
+    private Prof profession;
+    private int attitude;
+    public int Attitude
     {
-        get
+        get => attitude;
+        private set
         {
-            if (Attitude >= -5 && Attitude <= 5) { return "Aloof"; }
-            if (Attitude < -5) { return "Cynical"; }
-            if (Attitude > 5) { return "Optimist"; }
-            else { return "Error"; }
+            attitude = Math.Clamp(value, -100, 100);
         }
     }
-    string ideology
+    private int activism;
+    public int Activism
     {
-        get
+        get => activism;
+        private set
         {
-            if (Activism >= -5 && Activism <= 5) { return "Neutral"; }
-            if (Activism < -5) { return "Reactionary"; }
-            if (Activism > 5) { return "Radical"; }
-            else { return "Error"; }
+            activism = Math.Clamp(value, -100, 100);
         }
     }
-    string renown
+    private int reputation;
+    public int Reputation
     {
-        get
+        get => reputation;
+        private set
         {
-            if (Reputation >= -5 && Reputation <= 5) { return "Unkown"; }
-            if (Reputation < -5) { return "Infamous"; }
-            if (Reputation > 5) { return "Famous"; }
-            else { return "Error"; }
+            reputation = Math.Clamp(value, -100, 100);
         }
     }
     public Character(
-        string name, string surname, string title, string origin, string profession, int attitude,
+        string name, string surname, Title title, Origin origin, Prof profession, int attitude,
         int activism, int reputation
     )
     {
         this.name = name;
         this.surname = surname;
         this.title = title;
-        this.origin = origin;
         this.origin = origin;
         this.profession = profession;
         this.Attitude = attitude;
@@ -58,14 +50,62 @@ public class Character
     }
     public String GetName()
     {
-        return $"\n{name} {surname}";
+        return $"{name} {surname}";
     }
     public String GetNameTitle()
     {
-        return $"\n{title} {name} {surname}";
+        return $"{title} {name} {surname}";
     }
     public String GetEverything()
     {
-        return $"\n{title} {name} {surname}, {profession}";
+        return $"{title} {name} {surname}, {profession} of {origin}.";
+    }
+    public int GetCharAttr(AttributeType attribute)
+    {
+        switch (attribute)
+        {
+            case AttributeType.Attitude:
+                return this.Attitude;
+            case AttributeType.Activism:
+                return this.Activism;
+            case AttributeType.Reputation:
+                return this.Reputation;
+        }
+        return 0;
+    }
+    public void SetCharAttr(AttributeType attribute, int delta)
+    {
+        switch (attribute)
+        {
+            case AttributeType.Attitude:
+                ChangeAttitude(delta);
+                break;
+            case AttributeType.Activism:
+                ChangeActivism(delta);
+                break;
+            case AttributeType.Reputation:
+                ChangeReputation(delta);
+                break;
+        }
+    }
+    public void ChangeAttitude(int delta)
+    {
+        Attitude += delta;
+    }
+    public void ChangeActivism(int delta)
+    {
+        Activism += delta;
+    }
+    public void ChangeReputation(int delta)
+    {
+        Reputation += delta;
+    }
+    public void SetTitle(Title title)
+    {
+        this.title = title;
+    }
+    public void SetProfession(Prof profession)
+    {
+        this.profession = profession;
     }
 }

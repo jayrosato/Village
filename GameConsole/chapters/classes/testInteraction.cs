@@ -37,7 +37,7 @@ public class TestInteraction : Interaction
             amount: -1,
             opinion: -1
         );
-        Decision testDecision = new Decision(Globals.Adlo, [option0, option1, option2, option3], this.Character);
+        Decision testDecision = new Decision([option0, option1, option2, option3], this.Character);
         testDecision.MakeDecision();
         bool pass = Check.OpinionCheck(Globals.Adlo, this.Character, 1);
         if (pass)

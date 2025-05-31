@@ -49,7 +49,7 @@ public class Decision
     public Option[] Options { get; set; }
     public NPC Character { get; set; }
 
-    public Decision(Adlo adlo, Option[] options, NPC character = null)
+    public Decision(Option[] options, NPC character = null)
     {
         this.Options = options;
         this.Character = character;
@@ -62,7 +62,7 @@ public class Decision
 
         var availableOptions = options
         .Where(o =>
-            (o.GetAttribute == AttributeType.None || adlo.GetAdloValue(o.GetAttribute) >= o.Threshhold) &&
+            (o.GetAttribute == AttributeType.None || adlo.GetCharAttr(o.GetAttribute) >= o.Threshhold) &&
             (character == null || o.OpRequired == 0 || character.Opinion >= o.OpRequired) &&
             (o.TraitRequired == Trait.None || adlo.Traits.Contains(o.TraitRequired))
         ).ToList();
@@ -76,24 +76,14 @@ public class Decision
             if (int.TryParse(Console.ReadLine(), out int decision) && decision >= 1 && decision <= availableOptions.Count())
             {
                 Option option = availableOptions[decision - 1];
-                switch (option.SetAttribute)
+                if (option.SetAttribute != AttributeType.None)
                 {
-                    case AttributeType.None:
-                        return;
-                    case AttributeType.Attitude:
-                        adlo.Attitude += option.Amount;
-                        break;
-                    case AttributeType.Activism:
-                        adlo.Activism += option.Amount;
-                        break;
-                    case AttributeType.Reputation:
-                        adlo.Reputation += option.Amount;
-                        break;
+                    adlo.SetCharAttr(option.SetAttribute, option.Amount);
                 }
                 Console.WriteLine($"{option.Prompt}");
                 if (character != null && option.Opinion != 0)
                 {
-                    character.Opinion += option.Opinion;
+                    character.ChangeOpinion(option.Opinion);
                     Console.WriteLine($"{character.GetName()}'s {option.CharResult()} ({character.Opinion})");
                 }
                 if (option.SetAttribute != AttributeType.None && option.Amount != 0)

@@ -12,10 +12,11 @@ public class Room
 
     public List<Interaction> UpdateRoom()
     {
+        Adlo adlo = Globals.Adlo;
         var availableInteractions = this.Interactions
             .Where(interaction =>
                 (interaction.Completed != true) &&
-                (interaction.ReqAttribute == AttributeType.None || Globals.Adlo.GetAdloValue(interaction.ReqAttribute) >= interaction.Threshold) &&
+                (interaction.ReqAttribute == AttributeType.None || adlo.GetCharAttr(interaction.ReqAttribute) >= interaction.Threshold) &&
                 (interaction.Character == null || interaction.Character.Opinion >= interaction.ReqOpinion) &&
                 (interaction.ReqTrait == Trait.None || Globals.Adlo.Traits.Contains(interaction.ReqTrait))
             ).ToList();

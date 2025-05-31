@@ -7,6 +7,9 @@ public class Character
     private Title title;
     private Origin origin;
     private Prof profession;
+    public Title Title => title;
+    public Origin Origin => origin;
+    public Prof Profession => profession;
     private int attitude;
     public int Attitude
     {

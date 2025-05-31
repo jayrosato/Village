@@ -1,0 +1,14 @@
+C:\Users\jay_r\ConsoleGame\GameConsole\bin\Debug\net9.0\GameConsole.exe
+C:\Users\jay_r\ConsoleGame\GameConsole\bin\Debug\net9.0\GameConsole.deps.json
+C:\Users\jay_r\ConsoleGame\GameConsole\bin\Debug\net9.0\GameConsole.runtimeconfig.json
+C:\Users\jay_r\ConsoleGame\GameConsole\bin\Debug\net9.0\GameConsole.dll
+C:\Users\jay_r\ConsoleGame\GameConsole\bin\Debug\net9.0\GameConsole.pdb
+C:\Users\jay_r\ConsoleGame\GameConsole\obj\Debug\net9.0\GameConsole.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\jay_r\ConsoleGame\GameConsole\obj\Debug\net9.0\GameConsole.AssemblyInfoInputs.cache
+C:\Users\jay_r\ConsoleGame\GameConsole\obj\Debug\net9.0\GameConsole.AssemblyInfo.cs
+C:\Users\jay_r\ConsoleGame\GameConsole\obj\Debug\net9.0\GameConsole.csproj.CoreCompileInputs.cache
+C:\Users\jay_r\ConsoleGame\GameConsole\obj\Debug\net9.0\GameConsole.dll
+C:\Users\jay_r\ConsoleGame\GameConsole\obj\Debug\net9.0\refint\GameConsole.dll
+C:\Users\jay_r\ConsoleGame\GameConsole\obj\Debug\net9.0\GameConsole.pdb
+C:\Users\jay_r\ConsoleGame\GameConsole\obj\Debug\net9.0\GameConsole.genruntimeconfig.cache
+C:\Users\jay_r\ConsoleGame\GameConsole\obj\Debug\net9.0\ref\GameConsole.dll
